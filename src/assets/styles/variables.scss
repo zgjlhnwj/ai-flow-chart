@@ -1,0 +1,45 @@
+// 将变量定义在一个命名空间中
+@forward 'sass:math';
+
+// 布局相关
+$header-height: 88px;
+$footer-height: 100px;
+$sidebar-width: 240px;
+$navbar-height: 60px;
+
+// 内容区域宽度
+$content-max-width: 1200px;
+$content-min-width: 960px;
+
+// 间距
+$spacing-mini: 4px;
+$spacing-small: 8px;
+$spacing-base: 16px;
+$spacing-large: 24px;
+$spacing-xl: 32px;
+
+// 组件尺寸
+$button-height-small: 32px;
+$button-height-medium: 40px;
+$button-height-large: 48px;
+
+$input-height: 40px;
+$input-width: 240px;
+
+// 边框圆角
+$border-radius-small: 4px;
+$border-radius-base: 8px;
+$border-radius-large: 16px;
+
+// 移动端适配（基于100px = 1rem）
+$mobile-header-height: 44px;
+$mobile-footer-height: 50px;
+$mobile-content-padding: 15px;
+
+// 导出变量，使其可以在 JS 中使用
+:export {
+  headerHeight: $header-height;
+  footerHeight: $footer-height;
+  sidebarWidth: $sidebar-width;
+  contentMaxWidth: $content-max-width;
+} 

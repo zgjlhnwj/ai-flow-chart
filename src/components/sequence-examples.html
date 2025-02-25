@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时序图示例</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .example {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #DCDFE6;
+            border-radius: 4px;
+        }
+        
+        .example pre {
+            background-color: #f5f7fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        
+        .example-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .example-title {
+            font-size: 18px;
+            color: #303133;
+            margin: 0;
+        }
+        
+        .copy-btn {
+            padding: 5px 15px;
+            background-color: #409EFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .copy-btn:hover {
+            background-color: #66b1ff;
+        }
+        
+        .diagram {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #DCDFE6;
+            border-radius: 4px;
+        }
+        
+        .diagram-iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35,
+                mirrorActors: false
+            }
+        });
+
+        function copyExample(btn) {
+            const example = btn.closest('.example');
+            const pre = example.querySelector('pre');
+            const text = pre.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.textContent;
+                btn.textContent = '已复制！';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="example">
+        <div class="example-header">
+            <div class="example-title">购物流程示例</div>
+            <button class="copy-btn" onclick="copyExample(this)">复制代码</button>
+        </div>
+        <pre>sequenceDiagram
+    autonumber
+    participant 用户
+    participant 商城
+    participant 支付系统
+    participant 库存系统
+
+    用户->>商城: 选择商品
+    商城->>库存系统: 检查库存
+    库存系统-->>商城: 返回库存状态
+    
+    alt 库存充足
+        商城-->>用户: 显示确认订单
+        用户->>商城: 确认购买
+        商城->>支付系统: 发起支付
+        支付系统-->>用户: 跳转支付页面
+        用户->>支付系统: 完成支付
+        支付系统-->>商城: 支付成功通知
+        商城->>库存系统: 扣减库存
+        商城-->>用户: 显示购买成功
+    else 库存不足
+        商城-->>用户: 显示库存不足
+    end</pre>
+        <div class="diagram">
+            <div class="mermaid">
+sequenceDiagram
+participant 用户
+participant 商城
+participant 支付系统
+participant 库存系统
+用户->>商城: 选择商品
+商城->>库存系统: 检查库存
+库存系统-->>商城: 返回库存状态
+alt 库存充足
+    商城-->>用户: 显示确认订单
+    用户->>商城: 确认购买
+    商城->>支付系统: 发起支付
+    支付系统-->>用户: 跳转支付页面
+    用户->>支付系统: 完成支付
+    支付系统-->>商城: 支付成功通知
+    商城->>库存系统: 扣减库存
+    商城-->>用户: 显示购买成功
+else 库存不足
+    商城-->>用户: 显示库存不足
+end</div>
+        </div>
+    </div>
+
+    <div class="example">
+        <div class="example-header">
+            <div class="example-title">复杂业务流程示例</div>
+            <button class="copy-btn" onclick="copyExample(this)">复制代码</button>
+        </div>
+        <pre>sequenceDiagram
+    autonumber
+    participant 客户端
+    participant 网关
+    participant 服务A
+    participant 服务B
+    participant 消息队列
+    participant 缓存
+    participant 数据库
+
+    客户端->>网关: 发起请求
+    网关->>网关: 验证请求
+    
+    alt 验证通过
+        网关->>服务A: 转发请求
+        服务A->>缓存: 查询缓存
+        
+        alt 缓存命中
+            缓存-->>服务A: 返回数据
+        else 缓存未命中
+            服务A->>数据库: 查询数据
+            数据库-->>服务A: 返回数据
+            服务A->>缓存: 更新缓存
+        end
+        
+        服务A->>消息队列: 发送事件通知
+        服务A-->>网关: 返回处理结果
+        
+        par 异步处理
+            消息队列->>服务B: 消费事件
+            服务B->>数据库: 更新相关数据
+        end
+        
+        网关-->>客户端: 返回响应
+    else 验证失败
+        网关-->>客户端: 返回错误信息
+    end</pre>
+        <div class="diagram">
+            <div class="mermaid">
+sequenceDiagram
+participant 客户端
+participant 网关
+participant 服务A
+participant 服务B
+participant 消息队列
+participant 缓存
+participant 数据库
+客户端->>网关: 发起请求
+网关->>网关: 验证请求
+alt 验证通过
+    网关->>服务A: 转发请求
+    服务A->>缓存: 查询缓存
+    alt 缓存命中
+        缓存-->>服务A: 返回数据
+    else 缓存未命中
+        服务A->>数据库: 查询数据
+        数据库-->>服务A: 返回数据
+        服务A->>缓存: 更新缓存
+    end
+    服务A->>消息队列: 发送事件通知
+    服务A-->>网关: 返回处理结果
+    par 异步处理
+        消息队列->>服务B: 消费事件
+        服务B->>数据库: 更新相关数据
+    end
+    网关-->>客户端: 返回响应
+else 验证失败
+    网关-->>客户端: 返回错误信息
+end</div>
+        </div>
+    </div>
+</body>
+</html> 

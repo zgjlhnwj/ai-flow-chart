@@ -1,0 +1,165 @@
+// 全局变量
+$primary-color: #409eff;
+$border-color: #dcdfe6;
+$text-color: #333;
+$error-color: #f56c6c;
+
+// 页面布局
+.page-header {
+  padding: 0 20px;
+  text-align: center;
+  
+  h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+}
+
+.page-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  min-height: calc(100vh - 100px);
+
+  .panel-editor {
+    flex: 1;
+  }
+
+  .panel-preview {
+    flex: 2;
+  }
+}
+
+// 面板样式
+.panel {
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  
+  &-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  &-title {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  &-body {
+    padding: 15px;
+    height: calc(100vh - 250px);
+  }
+  
+  &-footer {
+    padding: 15px;
+    border-top: 1px solid $border-color;
+  }
+}
+
+// 预览区特殊样式
+.panel-preview {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);  // 与 page-container 的 min-height 保持一致
+  
+  .panel-body {
+    flex: 1;
+    height: auto;  // 覆盖默认的固定高度
+    overflow: auto;
+  }
+}
+
+// 编辑器样式
+#editor {
+  width: 100%;
+  height: 100%;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  padding: 10px;
+  font-family: monospace;
+  resize: none;
+}
+
+// 预览容器
+.preview-container {
+  height: 100%;
+  overflow: auto;
+  
+  .mermaid {
+    text-align: center;
+  }
+}
+
+// 按钮样式
+.el-button {
+  padding: 8px 15px;
+  margin-right: 10px;
+  border: 1px solid $primary-color;
+  background-color: $primary-color;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+  
+  &.secondary {
+    background-color: white;
+    color: $primary-color;
+  }
+}
+
+// 提示和错误信息
+.tips {
+  margin-top: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: $error-color;
+  font-size: 14px;
+}
+
+// 模态框样式
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &-content {
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    position: relative;
+    width: 80%;
+    height: 80%;
+  }
+  
+  &-close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    
+    &:hover {
+      color: $text-color;
+    }
+  }
+  
+  &-iframe {
+    width: 100%;
+    height: calc(100% - 20px);
+    border: none;
+  }
+} 
