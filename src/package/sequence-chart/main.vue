@@ -1,6 +1,7 @@
 <template>
     <div class="page-container">
-        <editor-panel v-model="code" @generate="updateDiagram" @show-examples="showExamples" ref="editorRef" />
+        <editor-panel v-model="code" @generate="updateDiagram" @show-examples="showExamples"
+            @show-syntax="showSyntaxDoc" ref="editorRef" />
         <preview-panel :diagram-svg="diagramSvg" ref="previewRef" />
     </div>
 
@@ -11,12 +12,21 @@
             <SequenceExamples v-if="showModal" class="modal-iframe" />
         </div>
     </div>
+
+    <!-- 语法文档弹窗 -->
+    <div v-if="showSyntaxModal" class="modal" @click.self="closeSyntaxDoc">
+        <div class="modal-content">
+            <span class="modal-close" @click="closeSyntaxDoc">&times;</span>
+            <SequenceSyntax v-if="showSyntaxModal" class="modal-iframe" />
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import mermaid from 'mermaid'
 import SequenceExamples from '@/components/modules/sequence-examples.vue'
+import SequenceSyntax from '@/components/modules/sequence-syntax.vue'
 import EditorPanel from './components/editor-panel.vue'
 import PreviewPanel from './components/preview-panel.vue'
 
@@ -37,6 +47,7 @@ const DEFAULT_SEQUENCE_DIAGRAM =
 const code = ref(DEFAULT_SEQUENCE_DIAGRAM);
 const diagramSvg = ref('');
 const showModal = ref(false);
+const showSyntaxModal = ref(false);
 const editorRef = ref();
 const previewRef = ref();
 
@@ -76,6 +87,14 @@ const showExamples = () => {
 
 const closeExamples = () => {
     showModal.value = false;
+};
+
+const showSyntaxDoc = () => {
+    showSyntaxModal.value = true;
+};
+
+const closeSyntaxDoc = () => {
+    showSyntaxModal.value = false;
 };
 
 onMounted(() => {

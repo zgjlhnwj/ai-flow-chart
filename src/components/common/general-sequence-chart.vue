@@ -21,6 +21,11 @@ interface Props {
             messageMargin?: number
             mirrorActors?: boolean
             fontSize?: number
+            actorFontSize?: number
+            noteFontSize?: number
+            messageFontSize?: number
+            wrap?: boolean
+            useMaxWidth?: boolean
         }
     }
 }
@@ -105,9 +110,13 @@ onMounted(() => {
 .sequence-chart-container {
     overflow-x: auto;
     background-color: rgb(244, 244, 244);
+    user-select: text;
+    /* 允许文本选择 */
 }
 
 .mermaid {
     text-align: center;
+    user-select: text;
+    /* 允许文本选择 */
 }
 </style>

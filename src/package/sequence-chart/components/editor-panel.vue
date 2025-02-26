@@ -9,6 +9,7 @@
         <div class="panel-footer">
             <button class="el-button" @click="updateDiagram">生成图表</button>
             <button class="el-button secondary" @click="showExamples">查看示例</button>
+            <button class="el-button secondary" @click="showSyntax">查看语法文档</button>
             <div class="tips">
                 提示: 建议使用 mermaid 语法, 在文本编辑器中编写, 然后复制粘贴到编辑区运行。
             </div>
@@ -28,6 +29,7 @@ const emit = defineEmits<{
     (e: 'update:modelValue', value: string): void
     (e: 'show-examples'): void
     (e: 'generate'): void
+    (e: 'show-syntax'): void
 }>()
 
 const errorMessage = ref('')
@@ -49,6 +51,10 @@ const updateDiagram = () => {
 
 const showExamples = () => {
     emit('show-examples')
+}
+
+const showSyntax = () => {
+    emit('show-syntax')
 }
 
 defineExpose({
