@@ -30,9 +30,9 @@ const handleDownload = () => {
     const svgElement = document.getElementById('diagram')?.querySelector('svg') as SVGSVGElement
     if (!svgElement) return
 
-    // 获取 SVG 的尺寸
-    const width = svgElement.clientWidth
-    const height = svgElement.clientHeight
+    const scale = 2
+    const width = svgElement.clientWidth * scale
+    const height = svgElement.clientHeight * scale
 
     // 创建 Canvas
     const canvas = document.createElement('canvas')
@@ -49,10 +49,10 @@ const handleDownload = () => {
     img.onload = () => {
         const ctx = canvas.getContext('2d')
         if (ctx) {
-            // 绘制图片到 Canvas
-            ctx.fillStyle = 'white'  // 设置白色背景
+            ctx.fillStyle = 'white'
             ctx.fillRect(0, 0, width, height)
-            ctx.drawImage(img, 0, 0)
+            // 直接绘制为2倍大小
+            ctx.drawImage(img, 0, 0, width, height)
 
             // 转换为 PNG 并下载
             canvas.toBlob((blob) => {
