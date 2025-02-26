@@ -1,6 +1,11 @@
 <template>
   <div class="sequence-example">
-    <example-1 />
+    <div class="example-item">
+      <example-1 />
+    </div>
+    <div class="example-item">
+      <example-1 />
+    </div>
   </div>
 </template>
 
@@ -14,6 +19,10 @@ import Example1 from '@/components/modules/demo-chat/example-1.vue'
 .sequence-example {
   max-height: 100vh;
   overflow-y: auto;
+}
+
+.example-item+.example-item {
+  margin-top: 20px;
 }
 
 /* 设置滚动条宽度 */

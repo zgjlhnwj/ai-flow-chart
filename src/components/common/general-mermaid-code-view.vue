@@ -33,8 +33,8 @@ const copyCode = async () => {
 
 <style lang="scss" scoped>
 .example {
-    margin-bottom: 30px;
-    padding: 20px;
+    margin-bottom: 10px;
+    padding: 10px 20px 0 20px;
     background-color: #f4f4f4;
     border-radius: 4px;
 }
