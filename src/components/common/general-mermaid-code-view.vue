@@ -2,7 +2,7 @@
     <div class="general-mermaid-code-view">
         <div class="example">
             <div class="example-header">
-                <div class="example-title">购物流程示例</div>
+                <div class="example-title" v-html="title"></div>
                 <button class="copy-btn" :class="{ 'copied': isCopied }" @click="copyCode">
                     {{ isCopied ? '复制成功' : '复制代码' }}
                 </button>
@@ -17,6 +17,7 @@ import { ref } from 'vue'
 
 const props = defineProps<{
     code: string
+    title?: string
 }>()
 
 const isCopied = ref(false)

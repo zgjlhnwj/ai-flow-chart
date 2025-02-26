@@ -18,9 +18,9 @@ $error-color: #f56c6c;
 .page-container {
   display: flex;
   gap: 20px;
-  padding: 20px;
-  min-height: calc(100vh - 100px);
-
+  padding: 10px;
+  height: 100%;
+  box-sizing: border-box;
   .panel-editor {
     flex: 1;
   }
@@ -42,7 +42,7 @@ $error-color: #f56c6c;
   
   &-title {
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
   }
   
   &-body {

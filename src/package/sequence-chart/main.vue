@@ -2,7 +2,7 @@
     <div class="page-container">
         <div class="panel panel-editor">
             <div class="panel-header">
-                <h2 class="panel-title">编辑区(时序图)</h2>
+                <h2 class="panel-title">Mermaid代码编辑区</h2>
             </div>
             <div class="panel-body">
                 <textarea id="editor" v-model="code" spellcheck="false" @input="handleInput"></textarea>
@@ -11,7 +11,7 @@
                 <button class="el-button" @click="updateDiagram">生成图表</button>
                 <button class="el-button secondary" @click="showExamples">查看示例</button>
                 <div class="tips">
-                    提示：请确保每行代码格式正确，不要有多余的空格。
+                    提示: 建议使用 mermaid 语法, 在文本编辑器中编写, 然后复制粘贴到编辑区运行。
                 </div>
                 <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
             </div>

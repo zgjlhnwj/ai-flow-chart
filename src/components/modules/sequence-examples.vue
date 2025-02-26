@@ -4,7 +4,7 @@
       <example-1 />
     </div>
     <div class="example-item">
-      <example-1 />
+      <example-2 />
     </div>
   </div>
 </template>
@@ -12,7 +12,7 @@
 <script lang="ts" setup>
 // 导入 example-1 组件
 import Example1 from '@/components/modules/demo-chat/example-1.vue'
-
+import Example2 from '@/components/modules/demo-chat/example-2.vue'
 </script>
 
 <style scoped>
