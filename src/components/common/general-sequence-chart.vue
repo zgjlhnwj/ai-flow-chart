@@ -20,6 +20,7 @@ interface Props {
             actorMargin?: number
             messageMargin?: number
             mirrorActors?: boolean
+            fontSize?: number
         }
     }
 }
@@ -31,7 +32,8 @@ const props = withDefaults(defineProps<Props>(), {
             showSequenceNumbers: false,
             actorMargin: 50,
             messageMargin: 40,
-            mirrorActors: false
+            mirrorActors: false,
+            fontSize: 12
         }
     })
 })
@@ -48,7 +50,19 @@ const renderChart = () => {
             element.innerHTML = props.code
         }
         // 重新渲染
-        mermaid.init(undefined, `#${chartId.value}`)
+        mermaid.init(undefined, `#${chartId.value}`).then(() => {
+            // 渲染完成后强制应用字体大小
+            const chartElement = document.getElementById(chartId.value)
+            if (chartElement) {
+                const fontSize = props.config?.sequence?.fontSize || 12
+                chartElement.style.fontSize = `${fontSize}px`
+                // 确保子元素也应用字体大小
+                const textElements = chartElement.querySelectorAll('text')
+                textElements.forEach(el => {
+                    el.style.fontSize = `${fontSize}px`
+                })
+            }
+        })
     } catch (error) {
         console.error('Mermaid rendering error:', error)
     }
@@ -66,7 +80,21 @@ onMounted(() => {
     // 初始化mermaid配置
     mermaid.initialize({
         startOnLoad: true,
-        ...props.config
+        theme: props.config?.theme,
+        sequence: {
+            showSequenceNumbers: props.config?.sequence?.showSequenceNumbers,
+            actorMargin: props.config?.sequence?.actorMargin,
+            messageMargin: props.config?.sequence?.messageMargin,
+            mirrorActors: props.config?.sequence?.mirrorActors,
+            // 字体大小配置需要在 sequence 配置对象中直接设置
+            fontSize: props.config?.sequence?.fontSize,
+            actorFontSize: props.config?.sequence?.fontSize,
+            noteFontSize: props.config?.sequence?.fontSize,
+            messageFontSize: props.config?.sequence?.fontSize,
+            // 确保文本能够正确显示
+            wrap: true,
+            useMaxWidth: true
+        }
     })
 
     renderChart()
