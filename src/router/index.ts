@@ -9,6 +9,10 @@ const routes: RouteRecordRaw[] = [
     // 配置子路由
     children: [
       {
+        path: '', // 空路径匹配根路径
+        redirect: '/sequence-chart' // 重定向到sequence-chart
+      },
+      {
         path: 'sequence-chart',
         name: 'SequenceChart',
         component: () => import('@/package/sequence-chart/main.vue')
