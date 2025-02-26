@@ -51,21 +51,6 @@ const showSyntaxModal = ref(false);
 const editorRef = ref();
 const previewRef = ref();
 
-// 修改 mermaid 配置
-mermaid.initialize({
-    startOnLoad: false,
-    theme: 'default',
-    securityLevel: 'loose',
-    sequence: {
-        diagramMarginX: 50,
-        diagramMarginY: 10,
-        boxTextMargin: 5,
-        noteMargin: 10,
-        messageMargin: 35,
-        mirrorActors: true
-    }
-});
-
 const updateDiagram = async () => {
     try {
         editorRef.value?.setError('');
@@ -103,17 +88,22 @@ onMounted(() => {
     }, 1000);
 });
 
-// 修改 mermaid 初始化配置
 onMounted(() => {
     mermaid.initialize({
         startOnLoad: true,
         theme: 'default',
+        securityLevel: 'loose',
         sequence: {
             showSequenceNumbers: true,
             actorMargin: 50,
             messageMargin: 40,
             mirrorActors: false,
-            // 移除 fontSize 相关配置，改用 JS 动态设置
+            boxMargin: 10,
+            boxTextMargin: 5,
+            noteMargin: 10,
+            diagramMarginX: 50,
+            diagramMarginY: 10,
+            width: 150,
             wrap: true,
             useMaxWidth: true
         }

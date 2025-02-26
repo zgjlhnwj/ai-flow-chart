@@ -26,6 +26,8 @@ interface Props {
             messageFontSize?: number
             wrap?: boolean
             useMaxWidth?: boolean
+            height?: number
+            width?: number
         }
     }
 }
@@ -38,7 +40,9 @@ const props = withDefaults(defineProps<Props>(), {
             actorMargin: 50,
             messageMargin: 40,
             mirrorActors: false,
-            fontSize: 12
+            fontSize: 12,
+            height: 40,
+            width: 150,
         }
     })
 })
@@ -91,11 +95,11 @@ onMounted(() => {
             actorMargin: props.config?.sequence?.actorMargin,
             messageMargin: props.config?.sequence?.messageMargin,
             mirrorActors: props.config?.sequence?.mirrorActors,
-            // 字体大小配置需要在 sequence 配置对象中直接设置
-            fontSize: props.config?.sequence?.fontSize,
             actorFontSize: props.config?.sequence?.fontSize,
             noteFontSize: props.config?.sequence?.fontSize,
             messageFontSize: props.config?.sequence?.fontSize,
+            width: props.config?.sequence?.width,
+            height: props.config?.sequence?.height,
             // 确保文本能够正确显示
             wrap: true,
             useMaxWidth: true
