@@ -1,11 +1,8 @@
 <template>
-    <div class="page-header">
-        <h1>时序图生成器 (Mermaid)</h1>
-    </div>
     <div class="page-container">
         <div class="panel panel-editor">
             <div class="panel-header">
-                <h2 class="panel-title">编辑区</h2>
+                <h2 class="panel-title">编辑区(流程图)</h2>
             </div>
             <div class="panel-body">
                 <textarea id="editor" v-model="code" spellcheck="false" @input="handleInput"></textarea>
@@ -35,7 +32,7 @@
     <div v-if="showModal" class="modal" @click.self="closeExamples">
         <div class="modal-content">
             <span class="modal-close" @click="closeExamples">&times;</span>
-            <iframe v-if="showModal" ref="examplesFrame" class="modal-iframe" src="./sequence-examples.html"></iframe>
+            <SequenceExamples v-if="showModal" class="modal-iframe" />
         </div>
     </div>
 </template>
@@ -43,6 +40,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import mermaid from 'mermaid'
+import SequenceExamples from '@/components/modules/sequence-examples.vue'
 const DEFAULT_SEQUENCE_DIAGRAM =
     `sequenceDiagram
       participant 用户
@@ -126,5 +124,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@use './style/sequence-diagram.scss';
+@use './style/index.scss';
 </style>

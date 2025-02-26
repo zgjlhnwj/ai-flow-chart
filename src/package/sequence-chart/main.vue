@@ -2,7 +2,7 @@
     <div class="page-container">
         <div class="panel panel-editor">
             <div class="panel-header">
-                <h2 class="panel-title">编辑区</h2>
+                <h2 class="panel-title">编辑区(时序图)</h2>
             </div>
             <div class="panel-body">
                 <textarea id="editor" v-model="code" spellcheck="false" @input="handleInput"></textarea>

@@ -1,19 +1,5 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
-<style lang="scss">
-.app {
-  .header {
-    height: $header-height;
-  }
-  
-  .main {
-    max-width: $content-max-width;
-    min-width: $content-min-width;
-    padding: $spacing-base;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

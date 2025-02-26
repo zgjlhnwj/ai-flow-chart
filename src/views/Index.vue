@@ -1,17 +1,12 @@
 <template>
   <!-- 浮动导航菜单 -->
-  <nav class="floating-nav">
-    <router-link to="/sequence-chart" class="nav-button" active-class="active">
-      时序图
-    </router-link>
-    <router-link to="/flow-chart" class="nav-button" active-class="active">
-      流程图
-    </router-link>
-  </nav>
+  <MenuNav />
   <!-- 子路由 -->
   <router-view></router-view>
 </template>
-
+<script setup lang="ts">
+import MenuNav from '@/components/common/general-menu-nav.vue'
+</script>
 <style scoped>
 .floating-nav {
   position: fixed;

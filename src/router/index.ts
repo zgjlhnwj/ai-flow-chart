@@ -4,8 +4,8 @@ import type { RouteRecordRaw } from 'vue-router'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'Menu',
-    component: () => import('@/views/Menu.vue'),
+    name: 'Index',
+    component: () => import('@/views/Index.vue'),
     // 配置子路由
     children: [
       {
