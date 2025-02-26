@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import mermaid from 'mermaid'
 import SequenceExamples from '@/components/modules/sequence-examples.vue'
 const DEFAULT_SEQUENCE_DIAGRAM =
@@ -80,6 +80,20 @@ const updateDiagram = async () => {
         await mermaid.parse(code.value.trim());
         const { svg } = await mermaid.render(id, code.value.trim());
         diagramSvg.value = svg;
+
+        // 在渲染完成后设置字体大小
+        nextTick(() => {
+            const chartElement = document.getElementById('diagram');
+            if (chartElement) {
+                const fontSize = 14; // 你可以根据需要调整默认字体大小
+                chartElement.style.fontSize = `${fontSize}px`;
+                // 确保子元素也应用字体大小
+                const textElements = chartElement.querySelectorAll('text');
+                textElements.forEach(el => {
+                    el.style.fontSize = `${fontSize}px`;
+                });
+            }
+        });
     } catch (error) {
         console.error('渲染图表时出错:', error);
         errorMessage.value = '图表语法错误，请检查输入格式是否正确';
@@ -108,7 +122,7 @@ onMounted(() => {
     }, 1000);
 });
 
-// 初始化 mermaid
+// 修改 mermaid 初始化配置
 onMounted(() => {
     mermaid.initialize({
         startOnLoad: true,
@@ -117,7 +131,10 @@ onMounted(() => {
             showSequenceNumbers: true,
             actorMargin: 50,
             messageMargin: 40,
-            mirrorActors: false
+            mirrorActors: false,
+            // 移除 fontSize 相关配置，改用 JS 动态设置
+            wrap: true,
+            useMaxWidth: true
         }
     })
 })
