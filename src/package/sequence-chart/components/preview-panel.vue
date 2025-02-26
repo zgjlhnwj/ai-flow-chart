@@ -3,7 +3,10 @@
         <div class="panel-header">
             <h2 class="panel-title">预览区</h2>
             <div class="panel-actions">
-                <button class="download-btn" @click="handleDownload" title="下载时序图">
+                <button class="action-btn" @click="handleFullscreen" title="全屏预览">
+                    <i class="fas fa-expand"></i>
+                </button>
+                <button class="action-btn" @click="handleDownload" title="下载时序图">
                     <i class="fas fa-download"></i>
                 </button>
             </div>
@@ -13,11 +16,15 @@
                 <div v-if="diagramSvg" class="mermaid" id="diagram" v-html="diagramSvg"></div>
             </div>
         </div>
+
+        <!-- 全屏预览组件 -->
+        <fullscreen-preview v-if="isFullscreen" :diagram-svg="diagramSvg" @close="isFullscreen = false" />
     </div>
 </template>
 
 <script setup lang="ts">
-import { nextTick } from 'vue'
+import { nextTick, ref } from 'vue'
+import FullscreenPreview from './fullscreen-preview.vue'
 
 const props = defineProps<{
     diagramSvg: string
@@ -72,6 +79,12 @@ const handleDownload = () => {
     img.src = url
 }
 
+const isFullscreen = ref(false)
+
+const handleFullscreen = () => {
+    isFullscreen.value = true
+}
+
 defineExpose({
     updateFontSize() {
         nextTick(() => {
@@ -101,7 +114,7 @@ defineExpose({
     gap: 8px;
 }
 
-.download-btn {
+.action-btn {
     padding: 4px 8px;
     border: none;
     background: transparent;
@@ -110,7 +123,7 @@ defineExpose({
     transition: color 0.3s;
 }
 
-.download-btn:hover {
+.action-btn:hover {
     color: #1890ff;
 }
 </style>
